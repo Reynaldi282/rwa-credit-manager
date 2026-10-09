@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+
+# secrets — never commit keys
+.env
+.env.*
+!.env.example
+!.env.local.example
+*.pem
+keystore/
+
+# Next.js
+apps/web/.next/
+apps/web/out/
+apps/web/next-env.d.ts
+apps/web/test-results/
+apps/web/playwright-report/
+*.tsbuildinfo
+
+# Foundry
+contracts/out/
+contracts/cache/
+# local Anvil broadcasts are throwaway; Sepolia broadcasts (tx evidence) are kept
+contracts/broadcast/*/31337/
+contracts/broadcast/**/dry-run/
+
+# misc
+.DS_Store
+npm-debug.log*
+.vercel
+.claude/settings.local.json

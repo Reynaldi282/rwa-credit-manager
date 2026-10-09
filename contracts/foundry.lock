@@ -1,0 +1,26 @@
+{
+  "lib\\forge-std": {
+    "tag": {
+      "name": "v1.17.0",
+      "rev": "f3dae6e6ee381f25eb6a246f7da9b85c91a68219"
+    }
+  },
+  "lib\\morpho-blue": {
+    "tag": {
+      "name": "v1.0.0",
+      "rev": "55d2d99304fb3fb930c688462ae2ccabb1d533ad"
+    }
+  },
+  "lib\\morpho-blue-irm": {
+    "tag": {
+      "name": "v1.0.0",
+      "rev": "a7d9cce3451b4a106bfd40933ac57a785b5228f3"
+    }
+  },
+  "lib\\openzeppelin-contracts": {
+    "tag": {
+      "name": "v5.7.0",
+      "rev": "cab19933c33c2ad1d4c7a84864a3601dddfd16f3"
+    }
+  }
+}

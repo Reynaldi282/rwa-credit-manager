@@ -1,0 +1,48 @@
+[profile.default]
+src = "src"
+out = "out"
+test = "test"
+script = "script"
+libs = ["lib"]
+# Our contracts use ^0.8.24. Morpho Blue and AdaptiveCurveIrm are pinned to 0.8.19 upstream and are
+# compiled separately (forge auto-detects one solc version per compilation unit).
+auto_detect_solc = true
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+via_ir = false
+# Deploy scripts write addresses to ./deployments/<chainId>.json
+fs_permissions = [{ access = "read-write", path = "./deployments" }]
+
+remappings = [
+  "forge-std/=lib/forge-std/src/",
+  "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+  "morpho-blue/=lib/morpho-blue/",
+  "morpho-blue-irm/=lib/morpho-blue-irm/",
+]
+
+[profile.default.fuzz]
+runs = 512
+
+[profile.default.invariant]
+runs = 64
+depth = 64
+fail_on_revert = false
+
+[profile.ci.fuzz]
+runs = 4096
+
+[rpc_endpoints]
+sepolia = "${SEPOLIA_RPC_URL}"
+anvil = "http://127.0.0.1:8545"
+
+[etherscan]
+sepolia = { key = "${ETHERSCAN_API_KEY}", chain = 11155111 }
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+quote_style = "double"
+number_underscore = "thousands"

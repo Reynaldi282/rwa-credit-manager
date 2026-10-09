@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn-base.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-heading: var(--font-geist-sans), system-ui, sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  /* Status palette (reserved: only for good / warning / serious / critical meaning, always with icon + label). */
+  --color-good: var(--status-good);
+  --color-warning: var(--status-warning);
+  --color-serious: var(--status-serious);
+  --color-critical: var(--status-critical);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-grid: var(--grid);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* Single dark theme (fintech dashboard). Values follow the validated dark chart chrome. */
+:root,
+.dark {
+  color-scheme: dark;
+  --background: #0d0d0d; /* page plane */
+  --foreground: #ffffff; /* primary ink */
+  --card: #1a1a19; /* chart / card surface */
+  --card-foreground: #ffffff;
+  --popover: #20201f;
+  --popover-foreground: #ffffff;
+  --primary: #256abf; /* white text clears 5.3:1 */
+  --primary-foreground: #ffffff;
+  --secondary: #262625;
+  --secondary-foreground: #ffffff;
+  --muted: #222221;
+  --muted-foreground: #9d9b94;
+  --ink-secondary: #c3c2b7;
+  --accent: #2a2a28;
+  --accent-foreground: #ffffff;
+  --destructive: #e66767;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #3987e5;
+  --grid: #2c2c2a;
+  --chart-1: #3987e5; /* categorical slot 1 (blue)   - validated vs #1a1a19 */
+  --chart-2: #d95926; /* categorical slot 2 (orange) - validated vs #1a1a19 */
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Tabular figures only where numbers align in columns. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

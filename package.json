@@ -1,0 +1,32 @@
+{
+  "name": "rwa-credit-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RWA Credit Manager — automated collateral protection for Morpho Blue borrowers (hackathon MVP)",
+  "workspaces": [
+    "packages/shared",
+    "services/keeper",
+    "apps/web"
+  ],
+  "scripts": {
+    "contracts:build": "cd contracts && forge build",
+    "contracts:test": "cd contracts && forge test",
+    "contracts:test:fork": "cd contracts && forge test --match-contract SepoliaFork -vv",
+    "anvil": "anvil --port 8545",
+    "deploy:local": "cd contracts && forge script script/DeployLocal.s.sol --rpc-url http://127.0.0.1:8545 --broadcast --unlocked --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 && cd .. && npm run sync",
+    "demo:forge:local": "cd contracts && forge script script/DemoScenario.s.sol --rpc-url http://127.0.0.1:8545 --broadcast --unlocked --sender 0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "sync": "node scripts/sync-shared.mjs",
+    "dev": "npm run dev -w @rwa/web",
+    "build": "npm run build -w @rwa/web",
+    "lint": "npm run lint -w @rwa/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test:shared": "npm run test -w @rwa/shared",
+    "keeper": "npm run start -w @rwa/keeper",
+    "keeper:once": "npm run once -w @rwa/keeper",
+    "e2e:local": "npm run e2e -w @rwa/keeper",
+    "test:ui": "npm run test:e2e -w @rwa/web"
+  },
+  "engines": {
+    "node": ">=20.9"
+  }
+}
