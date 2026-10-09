@@ -116,9 +116,7 @@ NEXT_PUBLIC_KEEPER_URL=<https URL of the keeper, optional>
 `@rwa/shared` workspace, set *Install Command* `cd ../.. && npm ci` and keep *Build Command* `npm run build`.
 Keep "Include source files outside of the Root Directory" enabled (default).
 
-**Render:** `render.yaml` defines the dashboard (`rwa-credit-manager-web`) and the keeper
-(`rwa-credit-manager-keeper`). New Blueprint → select the repo → fill the `sync: false` values → after the keeper is
-live, set `NEXT_PUBLIC_KEEPER_URL` on the web service and redeploy it.
+**Render:** `render.yaml` provisions only the free dashboard (`rwa-credit-manager-web`). Create a Blueprint from the repository; no wallet secret is required. The dashboard can be hosted before the Sepolia contracts are deployed, but on-chain features require the deployment artifact and `npm run sync` output to be committed and redeployed. Automatic protection requires a separately hosted keeper; set `NEXT_PUBLIC_KEEPER_URL` and rebuild when one is available.
 
 ## 7. Keeper
 

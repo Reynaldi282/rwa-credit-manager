@@ -1,11 +1,9 @@
 # Render Blueprint — RWA Credit Manager (Ethereum Sepolia testnet only).
 # Schema: https://render.com/schema/render.yaml.json   Validate: `render blueprints validate`
 #
-# 1. Deploy the contracts to Sepolia first (docs/DEPLOYMENT.md), run `npm run sync`, commit
-#    contracts/deployments/11155111.json + packages/shared/src/generated/*.
-# 2. Create this Blueprint, then fill the `sync: false` secrets in the Dashboard.
-# 3. Set NEXT_PUBLIC_KEEPER_URL on the web service to the keeper's https URL and redeploy the web
-#    service (NEXT_PUBLIC_* values are inlined at build time).
+# 1. Deploy the dashboard for free. Sepolia transactions require deploying contracts (docs/DEPLOYMENT.md),
+#    running `npm run sync`, and committing the deployment and generated addresses.
+# 2. Create this Blueprint. No keeper, wallet secret, or paid service is provisioned.
 projects:
   - name: rwa-credit-manager
     environments:
@@ -39,39 +37,3 @@ projects:
                 value: "false"
               - key: NEXT_PUBLIC_SEPOLIA_RPC_URL
                 value: https://ethereum-sepolia-rpc.publicnode.com
-              - key: NEXT_PUBLIC_KEEPER_URL
-                sync: false # e.g. https://rwa-credit-manager-keeper.onrender.com
-
-          # The keeper must run continuously to poll positions. Free web services spin down when idle,
-          # which would stop automation, so it uses an always-on paid instance.
-          - type: web
-            name: rwa-credit-manager-keeper
-            runtime: node
-            plan: starter
-            region: singapore
-            buildCommand: npm ci
-            startCommand: npm run start -w @rwa/keeper
-            healthCheckPath: /health
-            autoDeployTrigger: commit
-            maxShutdownDelaySeconds: 30
-            buildFilter:
-              paths:
-                - services/keeper/**
-                - packages/shared/**
-                - package.json
-                - package-lock.json
-              ignoredPaths:
-                - services/keeper/scripts/**
-            envVars:
-              - key: NODE_VERSION
-                value: "22"
-              - key: KEEPER_CHAIN_ID
-                value: "11155111"
-              - key: KEEPER_POLL_INTERVAL_MS
-                value: "15000"
-              - key: KEEPER_RPC_URL
-                sync: false # a Sepolia RPC endpoint (provider URL may contain an API key)
-              - key: KEEPER_PRIVATE_KEY
-                sync: false # dedicated low-value Sepolia keeper wallet — never a personal wallet
-              - key: KEEPER_CORS_ORIGINS
-                sync: false # e.g. https://rwa-credit-manager-web.onrender.com
